@@ -1,0 +1,227 @@
+<nav class="" id="top-navbar">
+    <div class="">
+      <div
+        class="d-flex flex-xl-row justify-content-xl-end justify-content-lg-end justify-content-md-end justify-content-sm-center justify-content-center">
+        <div class="p-2" [hidden]="isConnect">
+          <a routerLink="/connexion" class="btn btn-primary btn-sm"><i class="fas fa-user"></i> Connexion</a>
+        </div>
+        <div class="p-2" [hidden]="isConnect">
+          <a routerLink="/inscription" class="btn btn-dark btn-sm"> <i class="fas fa-user"></i> Créer un compte</a>
+        </div>
+        <div class="p-2" [hidden]="!isConnect">
+          {{username}}
+        </div>
+        <div class="p-2" [hidden]="!isConnect">
+          <button (click)="logout()" class="btn btn-danger btn-sm">Déconnexion</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="p-0" id="top-navbar-menu">
+    <div class="p-0">
+      <div class="d-flex">
+        <div (click)="btnMenuMobile()" class="p-2 bg-red align-self-start customMenuMobile">
+          <div [class.change]="isMenu">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
+        </div>
+        <div class="p-2 bg-white align-self-start customLogo">
+          <img src="assets/images/logo.jpg" class="logoSize" alt="">
+        </div>
+        <div class="customMenuLink">
+          <ul class="nav navbar-nav">
+            <li class="special-inspiration menuPosition">
+              <!-- <div class="iconInspiration"></div> -->
+              <a routerLink="/">
+                <strong>Accueil</strong>
+                <small>Bienvenue</small>
+              </a>
+            </li>
+            <li class="special-destinations menuPosition">
+              <div class="iconDestination"></div>
+              <a routerLink="/destination">
+                <strong>Destinations</strong>
+                <small>Où voulez-vous partir ?</small>
+              </a>
+            </li>
+            <li class="special-types menuPosition">
+              <div class="iconType"></div>
+              <a routerLink="/hebergement">
+                <strong>Hébergements</strong>
+                <small>Cabane ou bulle ?</small>
+              </a>
+            </li>
+            <li class="special-inspiration menuPosition">
+              <div class="iconInspiration"></div>
+              <a routerLink="/idees">
+                <strong>Idéee</strong>
+                <small>Trouvez une idée</small>
+              </a>
+            </li>
+            <li class="box-partner menuPositionPartner p-2">
+              <div class="iconParther"></div>
+              <a routerLink="/partenaire">
+                <strong>Devenez partenaire</strong>
+                <small>boostez vos ventes!</small>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="customCardMobile">
+        <div [class.menuMobile]="!isMenu">
+          <!-- {{isMenu?'mobile': ''}} -->
+          <hr>
+          <ul class="nav navbar-nav ">
+            <li class="special-inspiration menuPosition">
+              <div class="iconAccueil"></div>
+              <a routerLink="/" (click)="menuClose()">
+                <strong>Accueil</strong>
+                <small>Bienvenue</small>
+              </a>
+            </li>
+            <li class="special-destinations menuPosition">
+              <div class="iconDestination"></div>
+              <a routerLink="/destination" (click)="menuClose()">
+                <strong>Destinations</strong>
+                <small>Où voulez-vous partir ?</small>
+              </a>
+            </li>
+            <li class="special-types menuPosition">
+              <div class="iconType"></div>
+              <a routerLink="/hebergement" (click)="menuClose()">
+                <strong>Hébergements</strong>
+                <small>Cabane ou bulle ?</small>
+              </a>
+            </li>
+            <li class="special-inspiration menuPosition">
+              <div class="iconInspiration"></div>
+              <a routerLink="/idees" (click)="menuClose()">
+                <strong>Idéee</strong>
+                <small>Trouvez une idée</small>
+              </a>
+            </li>
+            <li class="box-partner menuPositionPartner menuPosition p-2 mb-2">
+              <div class="iconParther"></div>
+              <a routerLink="/partenaire">
+                <strong>Devenez partenaire</strong>
+                <small>boostez vos ventes!</small>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  <div>
+    <footer class="main-footer">
+      <div class="container">
+        <div class="row mb-2 pb-3 no-gutters">
+          <div class="col-md-4 mb-md-0 mb-4 d-flex">
+            <div class="con con-1 w-100 py-5">
+              <div class="con-info w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center mb-4">
+                  <span class="fas fa-phone" style="font-size: x-large;"></span>
+                </div>
+                <div class="text">
+                  <span>(+00) 1234 5678</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-md-0 mb-4 d-flex">
+            <div class="con con-2 w-100 py-5">
+              <div class="con-info w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center mb-4">
+                  <span class="fas fa-envelope" style="font-size: x-large;"></span>
+                </div>
+                <div class="text">
+                  <span>info@email.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-md-0 mb-4 d-flex">
+            <div class="con con-3 w-100 py-5">
+              <div class="con-info w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center mb-4">
+                  <span class="fas fa-map" style="font-size: x-large;"></span>
+                </div>
+                <div class="text">
+                  <span>203 Fake St. Mountain View, San Francisco, California, USA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <img src="assets/images/logo.jpg" class="logoSize mb-2" alt="">
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit quasi quisquam ad animi dolorum, repellat quaerat porro cum pariatur beatae laboriosam ipsam eos eligendi fuga sit fugit ex, quas voluptatem!</p>
+            </div>
+            
+            <div class="mt-5 border-top-footer">
+              <ul class="nav navbar-nav-footer mt-5">
+                <li class="special-destinations-footer">
+                  <div class="iconDestination"></div>
+                  <a routerLink="/destination" (click)="menuClose()">
+                    <strong>Destinations</strong>
+                    <small>Où voulez-vous partir ?</small>
+                  </a>
+                </li>
+                <li class="special-types-footer">
+                  <div class="iconType"></div>
+                  <a routerLink="/hebergement" (click)="menuClose()">
+                    <strong>Hébergements</strong>
+                    <small>Cabane ou bulle ?</small>
+                  </a>
+                </li>
+                <li class="special-inspiration-footer">
+                  <div class="iconInspiration"></div>
+                  <a routerLink="/idees" (click)="menuClose()">
+                    <strong>Idéee</strong>
+                    <small>Trouvez une idée</small>
+                  </a>
+                </li>
+                <li class="special-partenaire-footer">
+                  <div class="iconPartherfooter"></div>
+                  <a routerLink="/partenaire">
+                    <strong>Devenez partenaire</strong>
+                    <small>boostez vos ventes!</small>
+                  </a>
+                </li>
+  
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5 pt-4 border-top">
+          <div class="col-md-6 col-lg-8 mb-md-0 mb-4">
+            <p class="copyright mb-0 text-white">
+              Copyright © 2023 Atypikhouse Tous droits réservés
+            </p>
+          </div>
+          <div class="col-md-6 col-lg-4 text-md-right">
+            <div class="d-flex justify-content-end">
+              <div class="customSociaux">
+                <i class="fab fa-linkedin"></i>
+              </div>
+              <div class="customSociaux">
+                <i class="fab fa-facebook"></i>
+              </div>
+              <div class="customSociaux">
+                <i class="fab fa-instagram"></i>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
