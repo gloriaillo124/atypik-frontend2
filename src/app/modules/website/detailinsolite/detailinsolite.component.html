@@ -1,0 +1,196 @@
+<div class="d-item-destination">
+    <img class="d-block w-100 d-img-destination" [src]="urlApi+logementItem.image1" alt="First slide" />
+</div>
+<!-- <section class="container">
+    <h1>Image ligthbox</h1>
+</section> -->
+<section class="menuReservation">
+    <div class="container">
+        <div class="detailMenu d-flex justify-content-xl-end justify-content-lg-end justify-content-md-end">
+            <h1>à partir de {{logementItem.montant}} € / nuit</h1>
+            <button [disabled]="logementItem.disponible == '1' ? false : true" type="button" data-bs-toggle="modal" data-bs-target=".bs-reservation-modal-md" class="btn btn-secondary btn-sm">RESERVER MAINTENANT</button>
+        </div>
+    </div>
+</section>
+<section class="scrollMenu" id="section-scroll">
+    <div class="container">
+        <div class="detailMenu d-flex justify-content-xl-end justify-content-lg-end justify-content-md-end">
+            <h1>à partir de 195 € / nuit</h1>
+            <button type="button" data-bs-toggle="modal" data-bs-target=".bs-reservation-modal-md" class="btn btn-secondary btn-sm">RESERVER MAINTENANT</button>
+        </div>
+    </div>
+</section>
+<section class="container" id="section-rental-header">
+    <div class="pt-2">
+        <ol class="breadcrumb">
+            <li><a href="javascript:void(0)">Nos insolites > </a></li>
+            <li><a href="javascript:void(0)"> {{logementItem.destinationLibelle}} > </a></li>
+            <li class="active"> {{logementItem.libelle}}</li>
+          </ol>
+    </div>
+    <div class="pb-3">
+        <h2 class="title title-black">
+            <span>L'hébergement</span>
+        </h2>
+        <h1>
+            {{logementItem.libelle}}
+        </h1>
+    </div>
+</section>
+<section class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="itemHeberger d-flex gap-5 text-center">
+                <div>
+                    <img src="assets/images/icons/maison.png" alt="">
+                    <p>{{logementItem.hebergementLibelle}}</p>
+                </div>
+                <div>
+                    <img src="assets/images/icons/personne.png" alt="">
+                    <p>{{logementItem.capaciteAccueil}} personne</p>
+                </div>
+                <div>
+                    <img src="assets/images/icons/destination.png" height="100" alt="">
+                    <p>{{logementItem.destinationLibelle}}</p>
+                </div>
+            </div>
+            <p>{{logementItem.description}}</p>
+
+            <div class="itemImg mt-2 mb-4">
+                <h2 class="title title-black">
+                    <span>Plus d'image</span>
+                </h2>
+                <div class="imgInsolites ">
+                    <div *ngIf="logementItem.image1" class="imgCustomI">
+                        <img [src]="urlApi+logementItem.image1" alt="" class="imgInsoliteBannier">                        
+                    </div>
+                    <div *ngIf="logementItem.image2" class="imgCustomI">
+                        <img [src]="urlApi+logementItem.image2" alt="" class="imgInsoliteBannier">
+                    </div>
+                    <div *ngIf="logementItem.image3" class="imgCustomI">
+                        <img [src]="urlApi+logementItem.image3" alt="" class="imgInsoliteBannier">
+                    </div>
+                    <div *ngIf="logementItem.image4" class="imgCustomI">
+                        <img [src]="urlApi+logementItem.image4" alt="" class="imgInsoliteBannier">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Insolite actuellement </h6>
+                    <span [ngClass]="logementItem.disponible == '2' ? 'badge bg-danger' : 'badge bg-success' ">{{logementItem.disponible == '2' ? 'Occupé' : 'Disponible'}}</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Laissez-nous un commentaire
+                </div>
+                <div class="card-body">
+                    <div class="itemForm">
+                        <form (ngSubmit)="onCreateCommentaire()" #commentaireSubmit="ngForm">
+                            <div class="">
+                                <textarea class="form-controls w-100" [(ngModel)]="libelleCommentaire" name="libelleCommentaire" cols="30" rows="3" placeholder="Mom commentaire" required></textarea>
+                            </div>                        
+                            <div class="mt-3 d-grid gap-2">
+                                <button [disabled]="!commentaireSubmit.form.valid || isLoaderCommentaire" class="btn btn-primary w-sm waves-effect waves-light" type="submit">{{btnNameCommentaire}}</button>
+                            </div>                        
+                        </form>
+                    </div>
+                    <hr>
+                    <strong>Liste des commentaires</strong>
+                    <hr style="height: 2px; background-color: darkgray;">
+                    <div class="mt-2" *ngFor="let item of commentaireList">
+                        <span class="badge rounded-pill bg-secondary">
+                            <img [src]="urlApi+item.userImage" height="25" class="rounded-circle" alt="">
+                            {{item.userNom}} {{item.userPrenom}}
+                        </span>
+                        <p>{{item.message}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade bs-reservation-modal-md" tabindex="-1" aria-labelledby="addReservation" style="display: none"
+    aria-hidden="true" id="addReservationForm">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addReservation">Votre réservation insolite commence ici !</h5>
+                <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onCreateReservation()" #reservationSubmit="ngForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mt-4">
+                                <label class="form-label" for="optionValeurInput">Date de départ *</label>
+                                <input [style]="{'border-color': ErrorDateDepart ? 'red' : 'black'}" type="date" [(ngModel)]="dateDepart" name="dateDepart"
+                                    class="form-control customInputBtn" required placeholder="ex : 2">
+                            </div>
+                            <div class="mt-3">
+                                <label class="form-label" for="optionValeurInput">Date d'arriver *</label>
+                                <input [style]="{'border-color': ErrorDateArrivee ? 'red' : 'black'}" type="date" [(ngModel)]="dateArrivee" name="dateArrivee"
+                                    class="form-control customInputBtn" required placeholder="ex : 2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-between">
+                                <div></div>
+                                <button type="button" (click)="onCheckAddOption()" [ngClass]="isCheckAddOption == false ? 'btn btn-secondary btn-sm waves-effect waves-light' : 'btn btn-primary btn-sm waves-effect waves-light'">Ajouter les options</button>
+                            </div>                            
+                            <hr>
+                            <div class="">
+                                <div>
+                                    <div class="">
+                                        <div class="mb-3">
+                                            <select [disabled]="isCheckAddOption == false ? true : false" [style]="{'border-color': ErrorReservation ? 'red' : 'black'}" class="form-control customInputR" [(ngModel)]="libelleOption" name="libelleOption" >
+                                                <option value="" disabled>Selctionnner un option</option>
+                                                <option [value]="item.id" *ngFor="let item of optionList">{{item.libelle}}</option>
+                                            </select>
+                                            <div class="mt-3">
+                                                <label class="form-label" for="optionValeurInput">Valeur de l'option *</label>
+                                                <input [disabled]="isCheckAddOption == false ? true : false" [style]="{'border-color': ErrorOptionValeur ? 'red' : 'black'}" type="number" [(ngModel)]="optionValeur" name="optionValeur"
+                                                    class="form-control customInputBtn" required placeholder="ex : 2">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 text-center d-grid gap-2">
+                                            <button [disabled]="isCheckAddOption == false ? true : false || isLoaderLogR" (click)="onSubmitOption()" type="button" style="padding: 10px;" class="btn btn-primary btn-sm waves-effect waves-light">{{btnNameLogR}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light p-2 mb-3">
+                                Liste des options
+                            </div>
+                            <div class="mt-3 pl-1 mb-3 customOption" >
+                                <span class="badge rounded-pill bg-secondary p-2" *ngFor="let item of logementOptionList">
+                                    {{item.libelle}} - {{item.optionValeur}} 
+                                    <i (click)="onDeleteLogementOption(item)" class="fas fa-times-circle text-danger" style="margin-left: 12px; cursor: pointer;font-size: 14px;">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="isLoaderReservation"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameReseravtion}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>

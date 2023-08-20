@@ -1,0 +1,24 @@
+.bloc-type {
+    background-color: #FFF;
+    padding: 11px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.bloc-type .img {
+    height: 225px;
+    background-position: center;
+    background-size: cover;
+}
+
+.bloc-type .title {
+    font-family: "Amatic SC", cursive;
+    font-size: 27px;
+    color: #7f204e;
+    text-align: left;
+    height: 60px;
+}
+.title {
+    border: none;
+}

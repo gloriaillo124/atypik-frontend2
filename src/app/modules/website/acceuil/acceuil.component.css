@@ -1,0 +1,106 @@
+/* .flexCard *{
+margin: 12px 0 0 12px;
+} */
+
+.flexCard{
+    display: flex;
+    flex-wrap: wrap;
+  gap: 12px;
+  /* justify-content: center; */
+ }
+ 
+ .bloc-type {
+     background-color: #FFF;
+     padding: 11px;
+     position: relative;
+     text-align: center;
+     margin-bottom: 10px;
+ }
+ 
+ .bloc-type .img {
+     height: 225px;
+     background-position: center;
+     background-size: cover;
+ }
+ 
+ .bloc-type .title {
+     font-family: "Amatic SC", cursive;
+     font-size: 27px;
+     color: #7f204e;
+     text-align: left;
+     height: 60px;
+ }
+ .title {
+     border: none;
+ }
+ 
+ @media (max-width: 1199px){
+     .flexCard{
+         justify-content: center;
+     }
+ 
+     .card3 {
+         width: 455px;
+     }
+ 
+ .imgLogoCircle {
+     margin-top: -250px;
+ }
+ }
+ 
+ @media (max-width: 999px){
+     .flexCard{
+         justify-content: center;
+     }
+     
+     .card3 {
+         width: 700px;
+     }
+ 
+     .imgLogoCircle {
+         margin-top: -380px;
+     }
+ }
+ 
+ 
+ @media (max-width: 760px){
+ 
+     .imgLogoCircle {
+         margin-top: -280px;
+     }
+ }
+ 
+ @media (max-width: 500px){
+ 
+     .imgLogoCircle {
+         margin-top: -250px;
+     }
+ }
+ 
+ @media (max-width: 460px){
+ 
+     .imgLogoCircle {
+         margin-top: -230px;
+     }
+ }
+ 
+ @media (max-width: 425px){
+ 
+     .imgLogoCircle {
+         margin-top: -220px;
+     }
+ }
+ 
+ @media (max-width: 405px){
+ 
+     .imgLogoCircle {
+         margin-top: -200px;
+     }
+ }
+ 
+ @media (max-width: 375px){
+ 
+     .imgLogoCircle {
+         margin-top: -190px;
+     }
+ }

@@ -1,0 +1,45 @@
+.imgInsolites{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.imgCustomI{
+    width: 350px;
+    height: 250px;
+    background-color: blue;
+}
+
+.customOption{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.circleBtnImg{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(16, 16, 16); 
+    border-radius: 50px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 10px;
+    z-index: 999;
+}
+
+.imgInsoliteBannier{
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+}
+
+.iconFa{
+    font-size: 18px;
+    color: white;
+    padding-top: 6px;
+    
+}

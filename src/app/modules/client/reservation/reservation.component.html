@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">Réservation des Insolites</h4>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#navtabs-home" role="tab">
+                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                    <span class="d-none d-sm-block">Demande Insolite</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#navtabs-profile" role="tab">
+                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                    <span class="d-none d-sm-block">Insolite Occupé</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content p-3 text-muted">
+            <div class="tab-pane active" id="navtabs-home" role="tabpanel">
+               
+                <div class="table-responsive mb-4 mt-4">
+                    <table class="table table-centered table-nowrap mb-0">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nom Insolite</th>
+                            <th scope="col">Date Depart</th>
+                            <th scope="col">Date Arriver</th>
+                            <th scope="col">Montant</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Date Création</th>
+                            <th scope="col">Statut</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of reservationDemandList">
+                                <td>
+                                    {{item.libelle}}
+                                </td>
+                                <td>{{item.dateDepart}}</td>
+                                <td>{{item.dateArrive}}</td>
+                                <td >{{item.paiement}} Euro</td>
+                                <td >{{item.userNom}} {{item.userPrenom}}</td>
+                                <td>{{item.createdat}}</td>
+                                <td>
+                                    <span [ngClass]="item.confirme == '0' ? 'badge rounded-pill bg-secondary p-1' : item.confirme == '1' ? 'badge rounded-pill bg-success p-1' : 'badge rounded-pill bg-danger p-1' ">{{item.confirme == '0' ? 'En attente de validation' : item.confirme == '1' ? 'Demande Accepter' : 'Demande Annuler'}}</span>
+                                </td>
+                            </tr>
+                           
+                              
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane" id="navtabs-profile" role="tabpanel">
+                <div class="table-responsive mb-4 mt-4">
+                    <table class="table table-centered table-nowrap mb-0">
+                        <thead>
+                            <tr>
+                              <th scope="col">Nom Insolite</th>
+                              <th scope="col">Date Depart</th>
+                              <th scope="col">Date Arriver</th>
+                              <th scope="col">Montant</th>
+                              <th scope="col">Client</th>
+                              <th scope="col">Date Création</th>
+                              <th scope="col">Statut</th>
+                              <!-- <th scope="col" style="width: 50px;">Action</th> -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let item of reservationOccupeList">
+                                <td>
+                                    {{item.libelle}}
+                                </td>
+                                <td>{{item.dateDepart}}</td>
+                                <td>{{item.dateArrive}}</td>
+                                <td >{{item.paiement}} Euro</td>
+                                <td >{{item.userNom}} {{item.userPrenom}}</td>
+                                <td>{{item.createdat}}</td>
+                                <td>
+                                    <span class="badge rounded-pill bg-success p-1"> Occupé</span>
+                                </td>
+                              </tr>
+                             
+                                
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

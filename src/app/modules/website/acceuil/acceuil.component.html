@@ -1,0 +1,181 @@
+<div class="d-item">
+    <img class="d-block w-100 d-img" src="assets/images/background/insolite4.jpg" alt="First slide" />
+    <div class="carousel-caption item-c1">
+        <h2>Offrez-vous une des vaccances dans un de nos Atypikhouse </h2>
+        <form (ngSubmit)="onSubmitRecherche()" #rechercheForm="ngForm" class="mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label" for="destination">Destination</label>
+                        <select [ngStyle]="{'border-color': ErrorDestinationId ? 'red' : ''}" [(ngModel)]="destinationId" name="destinationId" required class="form-control customInput">
+                            <option value="">Selctionnner une destination</option>
+                            <option [value]="item.id" *ngFor="let item of destinationListAll">
+                                {{item.libelle}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label" for="categorie">Catégorie</label>
+                        <select [ngStyle]="{'border-color': ErrorHebergementId ? 'red' : ''}" [(ngModel)]="hebergementId" name="hebergementId" required class="form-control customInput">
+                            <option value="">Selctionnner une catégorie</option>
+                            <option [value]="item.id" *ngFor="let item of hebergementListAll">
+                                {{item.libelle}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label" for="personne">Nombre de Personne</label>
+                        <input [ngStyle]="{'border-color': ErrorNbPersonne ? 'red' : ''}" [(ngModel)]="nbPersonne" name="nbPersonne" type="number" class="form-control customInput" placeholder="0" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label" for="dateArrivee">Date d'arrivée</label>
+                        <input [ngStyle]="{'border-color': ErrorDateArrivee ? 'red' : ''}" [(ngModel)]="dateArrivee" name="dateArrivee" type="date" class="form-control customInput" placeholder="" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3" style="text-align: left;">
+                        <label class="form-label" for="dateDepart">Date de départ</label>
+                        <input [ngStyle]="{'border-color': ErrorDateDepart ? 'red' : ''}" [(ngModel)]="dateDepart" name="dateDepart" type="date" class="form-control customInput" placeholder="" required>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button [disabled]="isLoader" class="btn btn-primary btn-lg w-50 waves-effect waves-light"
+                        type="submit">{{btnName}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<section class="section-experience pb-4">
+    <div class="container">
+        <div class="col-md-12 mt-5">
+            <h2 class="title title-big title-blue">
+                <span class="title-black">Faites un voeu !</span><br>
+                Les plus belles expériences
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let item of hebergementList">
+                <div class="bloc-type" (click)="onClickHebergementById(item)">
+                    <div class="img lazy" [ngStyle]="{'display': 'block','background-image': 'url(' + urlApi+item.image + ')'}"></div>
+                    <!-- [ngStyle]="{'display': 'block', 'background-image': 'url('assets/images/background/insolite4.jpg');"} -->
+                    <h3 class="title">
+                      <a href="javascript:void(0)">{{item.libelle}}</a>
+                    </h3>
+                    <p class="description">{{item.description}}</p>
+                    <hr>
+                    <a href="javascript:void(0)" (click)="onClickHebergementById(item)" class="link">Voir les hébergements</a>
+                  </div>
+                <!-- <div class="card1" (click)="onClickHebergementById(item)">
+                    <h3>{{item.libelle}}</h3>
+                    <p class="small p-0 m-0">{{item.description}}</p>
+                    <div class="go-corner" href="javascript:void(0)">
+                      <div class="go-arrow">
+                        →
+                      </div>
+                    </div>
+                  </div>  -->
+            </div>
+        </div> 
+    </div>
+
+</section>
+
+<section *ngIf="logementList" class="section-destination pt-2 pb-2">
+    <div class="container">
+        <div class="col-md-12 mt-5">
+            <h2 class="title title-big title-blue">
+                <span class="title-black">On a testé pour vous</span><br>
+                Nos insolites favorites
+            </h2>
+        </div>
+        <div class="mt-5 pb-5">
+            <div class="flexCard" >
+                <div class="card3" *ngFor="let item of logementList" (click)="onClickLogementById(item)">
+                    <img class="cardImg1" [src]="urlApi+item.image1" alt="First slide" />
+                    <div class="imgLogoCircle">
+                        <img class="" src="assets/images/logoCircle.png" height="50" alt="First slide" />
+                    </div>
+                    <div class="imgTxt">
+                        <h1>à partir de {{item.montant}} <span style="font-size: 15px;">FCFA/Nuité</span></h1>
+                        <p>{{item.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+</section>
+
+<section class="section-atypik">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title title-big title-black">
+                    <span class="title-white">Puisqu'on vous le dit !</span><br>
+                    <div class="text-white">Pourquoi choisir</div> <br>
+                    <img class="lazy" alt="Abracadroom" src="assets/images/logo.jpg" style="display: inline-block;">
+                </h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="why">
+                        <p style="text-align: justify; ">AtipykHouse sélectionne pour vous des hébergements insolites
+                            partout en France ! Découvrez des endroits atypiques au cœur de nos belles régions
+                            françaises : dans des cadres enchanteurs, AbracadaRoom vous garantit un séjour unique hors
+                            des sentiers battus ! Lov’Nid, igloos, tipis, tanières de Hobbit, et bien plus encore !
+                            Défiez le vertige dans une cabane à 12 mètres de hauteur, laissez-vous flotter sur une
+                            cabane au milieu d’un lac, observez les étoiles depuis votre lit dans une bulle ou
+                            expérimentez la vie de bohème dans une roulotte… </p>
+                        <p style="text-align: justify; ">Grâce à nous, vous vivrez une véritable expérience hors du
+                            commun, loin des standards des hôtels classiques... Feuilles, animaux de la forêt et petits
+                            insectes seront sans doute de la partie !</p>
+
+                        <p style="text-align: justify; ">Réservez instantanément votre coup de cœur directement en ligne
+                            depuis smartphone, tablette ou ordinateur. A moins de 2 heures de chez vous ou à l’autre
+                            bout de la France, vous êtes sûrs de trouver l’hébergement de vos rêves grâce à notre moteur
+                            de recherche intuitif et son système de géolocalisation. Sélectionnez une date, un type
+                            d'hébergement, une thématique et...&nbsp;</p>
+                        <p style="text-align: justify; ">Abracadabra ! Offrez-vous la magie d’une nuit insolite !&nbsp;
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="section-notes">
+    <div class="container">
+        <div class="col-md-12 mt-5">
+            <h2 class="title title-big title-blue">
+                <span class="title-black">Ils vont nous faire rougir</span><br>
+                Ils ont sacrément aimé !
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let item of destinationList">
+                <div class="card1" (click)="onClickDestinationById(item)">
+                    <h3>{{item.libelle}}</h3>
+                    <!-- <p class="m-0">AtipyHouse</p> -->
+                    <div class="go-corner" href="javascript:void(0)">
+                      <div class="go-arrow">
+                        →
+                      </div>
+                    </div>
+                  </div> 
+            </div>
+        </div>
+    </div>
+
+</section>

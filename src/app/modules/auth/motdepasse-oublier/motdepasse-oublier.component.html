@@ -1,0 +1,52 @@
+<div class="row align-items-center justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="col-xl-12">
+            <div class="card">
+               
+                <div class="card-body p-4"> 
+                    <div class="text-center">
+                        <a routerLink="/" class="">
+                            <img src="assets/images/logo.jpg" class="logoSize" alt="">
+                        </a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <h5 class="text-primary">Réinitialisataion du Mot de passe !</h5>
+                    </div>
+                    <div class="p-2 mt-4">
+                        <form (ngSubmit)="passwordInit()" #insoliteForm="ngForm">
+        
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Adresse email</label>
+                                <input type="email" (ngModelChange)="onChangeEmail()" [(ngModel)]="email" name="email" class="form-control" placeholder="Adresse email" required>
+                                <p [hidden]="!Erroremail" class="text-danger">{{Erroremail}}</p>
+                            </div>
+        
+                            <div class="mb-3">
+                                <label class="form-label" for="userpassword">Nouveau Mot de passe</label>
+                                <input type="password" (ngModelChange)="onChangePassword()" [(ngModel)]="password" required name="password" class="form-control" placeholder="Mot de passe" required>
+                                <p [hidden]="!Errorpassword" class="text-danger">{{Errorpassword}}</p>
+                            </div>
+        
+                            <div class="mb-3">
+                                <label class="form-label" for="confirmer">Confirmer Mot de passe</label>
+                                <input type="password" (ngModelChange)="onChangePasswordRepeat()" [(ngModel)]="passwordRepeat" required name="passwordRepeat" class="form-control" id="confirmer" placeholder="Confirmer mot de passe" required>
+                                <p [hidden]="!ErrorpasswordRepeat" class="text-danger">{{ErrorpasswordRepeat}}</p>
+                            </div>
+                            
+                            <div class="mt-3 d-grid gap-2">
+                                <button [disabled]="isLoader" class="btn btn-primary w-lg waves-effect waves-light" type="submit"> {{btnName}} </button>
+                            </div>            
+        
+                            <div class="mt-4 text-center">
+                                <p class="mb-0">Vous avez déja un compte ? <a routerLink="/connexion" class="fw-medium text-primary"> Connectez-vous</a> </p>
+                            </div>
+                        </form>
+                    </div>
+        
+                </div>
+            </div>  
+        </div>
+    </div>  
+</div>
+
+

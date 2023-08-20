@@ -1,0 +1,371 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0"> Catégorie des Insolites</h4>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="card-header mb-3 d-flex align-items-center justify-content-between">
+            <div>
+            </div>
+            <div>
+                <button data-bs-toggle="modal" data-bs-target=".bs-hebergement-modal-md" [hidden]="!isHebergement"
+                    type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i> Ajouter un
+                    Hebergement</button>
+                <button data-bs-toggle="modal" data-bs-target=".bs-destination-modal-md" [hidden]="!isDestination"
+                    type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i> Ajouter une
+                    Destination</button>
+                <button data-bs-toggle="modal" data-bs-target=".bs-inspiration-modal-md" [hidden]="!isInspiration"
+                    type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i> Ajouter une
+                    Inspiration</button>
+            </div>
+        </div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" (click)="onChangeTab1()">
+                <a class="nav-link active" data-bs-toggle="tab" href="#navtabs-home" role="tab">
+                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                    <span class="d-none d-sm-block">Hebergement</span>
+                </a>
+            </li>
+            <li class="nav-item" (click)="onChangeTab2()">
+                <a class="nav-link" data-bs-toggle="tab" href="#navtabs-profile" role="tab">
+                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                    <span class="d-none d-sm-block">Destination</span>
+                </a>
+            </li>
+            <li class="nav-item" (click)="onChangeTab3()">
+                <a class="nav-link" data-bs-toggle="tab" href="#navtabs-messages" role="tab">
+                    <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                    <span class="d-none d-sm-block">Inspiration</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content p-3 text-muted">
+            <div class="tab-pane active" id="navtabs-home" role="tabpanel">
+
+                <div class="table-responsive mb-4 mt-4">
+                    <table class="table table-centered table-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Libelle</th>
+                                <th scope="col">Description</th>
+                                <th scope="col" style="width: 50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of hebergementList">
+                                <td><img [src]="urlApi+item.image" alt="" height="100" class=""> </td>
+                                <td>{{item.libelle}}</td>
+                                <td>{{item.description}}</td>
+                                <td>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <button data-bs-toggle="modal" data-bs-target=".bs-updatedhebergement-modal-md" (click)="onLoadHebergement(item)" class="px-2 btn btn-warning btn-sm"><i
+                                                    class="fas fa-edit font-size-16"></i></button>
+                                        </li>
+                                        <!-- <li class="list-inline-item">
+                                            <a href="javascript:void(0);" class="px-2 text-danger"><i class="fas fa-trash font-size-18"></i></a>
+                                        </li> -->
+                                    </ul>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane" id="navtabs-profile" role="tabpanel">
+                <div class="table-responsive mb-4 mt-4">
+                    <table class="table table-centered table-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Libelle</th>
+                                <th scope="col" style="width: 50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of destinationList">
+                                <td>{{item.libelle}}</td>
+                                <td>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <button data-bs-toggle="modal" data-bs-target=".bs-updateddestination-modal-md" (click)="onLoadDestination(item)" class="px-2 btn btn-sm btn-warning"><i
+                                                    class="fas fa-edit font-size-16"></i></button>
+                                        </li>
+                                        <!-- <li class="list-inline-item">
+                                              <a href="javascript:void(0);" class="px-2 text-danger"><i class="fas fa-trash font-size-18"></i></a>
+                                          </li> -->
+                                    </ul>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane" id="navtabs-messages" role="tabpanel">
+                <div class="table-responsive mb-4 mt-4">
+                    <table class="table table-centered table-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Libelle</th>
+                                <th scope="col" style="width: 50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of inspirationList">
+                                <td>{{item.libelle}}</td>
+                                <td>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <button data-bs-toggle="modal" data-bs-target=".bs-updatedinspiration-modal-md" (click)="onLoadInspiration(item)" class="px-2 btn btn-sm btn-warning"><i
+                                                    class="fas fa-edit font-size-16"></i></button>
+                                        </li>
+                                        <!-- <li class="list-inline-item">
+                                              <a href="javascript:void(0);" class="px-2 text-danger"><i class="fas fa-trash font-size-18"></i></a>
+                                          </li> -->
+                                    </ul>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade bs-hebergement-modal-md" tabindex="-1" aria-labelledby="addHebergement" style="display: none"
+    aria-hidden="true" id="addHebergementForm">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addHebergement">Hebergement</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onCreateHebergement()" #hebergementSubmit="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="hebergementInput">Libelle *</label>
+                        <input type="text" [(ngModel)]="libelleHebergement" name="libelleHebergement"
+                            class="form-control" required placeholder="ex : boite">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="hebergementInput">Description(facultatif)</label>
+                        <textarea [(ngModel)]="description" name="description" class="form-control" required cols="10"
+                            rows="5"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <input (change)="onChangeFile($event)" type="file" class="form-control" required accept="image/*">
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!hebergementSubmit.form.valid || isLoaderHebergement"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameHebergement}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<div class="modal fade bs-updatedhebergement-modal-md" tabindex="-1" aria-labelledby="updatedhebergement" style="display: none"
+    aria-hidden="true" id="updatedHebergementForm">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updatedhebergement">Modifier Hebergement</h5>
+                <button type="button" #closeBtnHebergement class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onUpdatedHebergement()" #updatedhebergementSubmit="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="hebergementInput">Libelle *</label>
+                        <input type="text" [(ngModel)]="updatedLibelleHebergement" name="updatedLibelleHebergement"
+                            class="form-control" required placeholder="ex : boite">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="hebergementInput">Description(facultatif)</label>
+                        <textarea [(ngModel)]="updatedDescription" name="updatedDescription" class="form-control" required cols="10"
+                            rows="5"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Fermer</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!updatedhebergementSubmit.form.valid || isLoaderHebergement"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameHebergement}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<div class="modal fade bs-destination-modal-md" tabindex="-1" aria-labelledby="addDestination" style="display: none"
+    aria-hidden="true" id="addDestinationForm">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDestination">Destination</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onCreateDestination()" #destinationSubmit="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="destinationInput">Libelle *</label>
+                        <input type="text" [(ngModel)]="libelleDestination" name="libelleDestination"
+                            class="form-control" required placeholder="ex : boite">
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!destinationSubmit.form.valid || isLoaderDestination"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameDestination}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<div class="modal fade bs-updateddestination-modal-md" tabindex="-1" aria-labelledby="updateddestination" style="display: none"
+    aria-hidden="true" id="updatedDestinationForm">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateddestination">Modifier Destination</h5>
+                <button type="button" #closeBtnDestination class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onUpdatedDestination()" #updateddestinationSubmit="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="destinationInput">Libelle *</label>
+                        <input type="text" [(ngModel)]="updatedLibelleDestination" name="updatedLibelleDestination"
+                            class="form-control" required placeholder="ex : boite">
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!updateddestinationSubmit.form.valid || isLoaderDestination"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameDestination}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+
+<div class="modal fade bs-inspiration-modal-md" tabindex="-1" aria-labelledby="addInspiration" style="display: none"
+    aria-hidden="true" id="addInspirationForm">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addInspiration">Inspiration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onCreateInspiration()" #inspirationSubmit="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="inspirationInput">Libelle *</label>
+                        <input type="text" [(ngModel)]="libelleInspiration" name="libelleInspiration"
+                            class="form-control" required placeholder="ex : boite">
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!inspirationSubmit.form.valid || isLoaderInspiration"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameInspiration}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<div class="modal fade bs-updatedinspiration-modal-md" tabindex="-1" aria-labelledby="updatedInspiration" style="display: none"
+    aria-hidden="true" id="updatedInspirationForm">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updatedInspiration">Modifier Inspiration</h5>
+                <button type="button" #closeBtnInspiration class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onUpdatedInspiration()" #updatedinspirationSubmit="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="inspirationInput">Libelle *</label>
+                        <input type="text" [(ngModel)]="updatedLibelleInspiration" name="updatedLibelleInspiration"
+                            class="form-control" required placeholder="ex : boite">
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!updatedinspirationSubmit.form.valid || isLoaderInspiration"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameInspiration}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>

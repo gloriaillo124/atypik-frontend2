@@ -1,0 +1,298 @@
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">Gestion des Insolites</h4>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-header mb-3 d-flex align-items-center justify-content-between">
+            <div>                
+            </div>
+            <div>
+                <button type="button" data-bs-toggle="modal" data-bs-target=".bs-logement-modal-md" class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i> Ajouter un Insolite</button>
+            </div>
+        </div>
+
+        <div class="table-responsive mb-4 mt-4">
+            <table class="table table-centered text-center table-nowrap mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Nom Insolite</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Capacite d'Accueil</th>
+                    <th scope="col">Disponibilité</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col" style="width: 50px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of logementList">
+                        <td>
+                            {{item.libelle}}
+                        </td>
+                        <td>{{item.hebergementLibelle}}</td>
+                        <td>{{item.capaciteAccueil}}</td>
+                        <td >
+                            <!-- {{item.disponible=='1'? 'Insolite Disponible':'Non Disponible'}} -->
+                            <span [ngClass]="item.disponible == '1' ? 'badge rounded-pill bg-success' : item.disponible == '2' ? 'badge rounded-pill bg-primary' : 'badge rounded-pill bg-warning' ">{{item.disponible == '1' ? 'Insolite Disponible' : item.disponible == '2' ? 'Insolite Occupé' : 'Non Disponible'}}</span> 
+                        </td>
+                        <td >{{item.montant}}</td>
+                        <td>
+                            <!-- {{item.statut =='0'? 'Aucune Image associé':'Insolite est Complèt'}} -->
+                            <span [ngClass]="item.statut == '1' ? 'badge rounded-pill bg-success' : 'badge rounded-pill bg-danger' ">{{item.statut =='0'? 'Aucune Image associé':'Insolite est Complèt'}}</span> 
+                        </td>
+                        <td>
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <button (click)="getdetailLogement(item.id!)" class="px-2 btn btn-sm btn-primary"><i class="fas fa-eye font-size-16"></i></button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <button [hidden]="item.disponible == '2' ? false : true" (click)="getReservationCloture(item.id!)" class="px-2 btn btn-sm btn-secondary">Cloture la Reservation</button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <button [hidden]="item.disponible == '2' ? true : false" (click)="onClickUpdated(item)" data-bs-toggle="modal" data-bs-target=".bs-updatedlogement-modal-md" class="px-2 btn btn-sm btn-warning"><i class="fas fa-edit font-size-16"></i></button>
+                                </li>
+                                <li class="list-inline-item" [hidden]="item.statut == '1' ? true : false" >
+                                    <button (click)="onDeleteLogementAdmin(item)" class="px-2 btn btn-sm btn-danger"><i class="fas fa-times-circle font-size-16"></i></button>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                   
+                      
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+
+<div class="modal fade bs-logement-modal-md" tabindex="-1" aria-labelledby="addLogement" style="display: none"
+    aria-hidden="true" id="addLogementForm">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addLogement">Insolite</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onCreateLogement()" #logementSubmit="ngForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="hebergementInput">Libelle *</label>
+                                <input type="text" [(ngModel)]="libelle" name="libelle"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="montantInput">Montant *</label>
+                                <input type="number" [(ngModel)]="montant" name="montant"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="hebergementInput">Description</label>
+                        <textarea [(ngModel)]="description" name="description" class="form-control" required cols="2"
+                            rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label" for="capaciteAccueilInput">Capacite d'Accueil *</label>
+                                <input type="number" [(ngModel)]="capaciteAccueil" name="capaciteAccueil"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="nombrePieceInput">Nombre de Piece *</label>
+                                <input type="number" [(ngModel)]="nombrePiece" name="nombrePiece"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="nombreChambreInput">Nombre de Chambre *</label>
+                                <input type="number" [(ngModel)]="nombreChambre" name="nombreChambre"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label" for="hebergementInput">Hebergement *</label>
+                                <select (ngModelChange)="onChangeHebergement()" [(ngModel)]="categorie_hebergement" name="categorie_hebergement" class="form-control" >
+                                    <option value="" disabled>Selectionner un hebergement</option>
+                                    <option [value]="item.id" *ngFor="let item of hebergementList"> {{item.libelle}} </option>
+                                </select>
+                                <p [hidden]="!isErreurhebergement" class="text-danger">Selectionner un hebergement svp</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="destinationInput">Destination *</label>
+                                <select (ngModelChange)="onChangeDestination()" [(ngModel)]="categorie_destination" name="categorie_destination" class="form-control" >
+                                    <option value="" disabled>Selectionner une Destination</option>
+                                    <option [value]="item.id" *ngFor="let item of destinationList"> {{item.libelle}} </option>
+                                </select>
+                                <p [hidden]="!isErreurdestination" class="text-danger">Selectionner une Destination svp</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="inspirationInput">Inspiration *</label>
+                                <select (ngModelChange)="onChangeInspiration()" [(ngModel)]="categorie_inspiration" name="categorie_inspiration" class="form-control" >
+                                    <option value="" disabled>Selectionner une Inspiration</option>
+                                    <option [value]="item.id" *ngFor="let item of inspirationList"> {{item.libelle}} </option>
+                                </select>
+                                <p [hidden]="!isErreurinspiration" class="text-danger">Selectionner une Inspiration svp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label" for="isCodepromoInput">Code Promo *</label>
+                                <select [(ngModel)]="isCodepromo" name="isCodepromo" class="form-control" >
+                                    <option value="Non">Non</option>
+                                    <option value="Oui">Oui</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="pourcentageInput">Pourcentage {{isCodepromo}} *</label>
+                                <input type="number" [disabled]="isCodepromo=='Non'?true:false" [(ngModel)]="isPourcentage" name="isPourcentage"
+                            class="form-control" required placeholder="ex : 12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!logementSubmit.form.valid || isLoaderLogement"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameLogement}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<div class="modal fade bs-updatedlogement-modal-md" tabindex="-1" aria-labelledby="updatedLogement" style="display: none"
+    aria-hidden="true" id="updatedLogementForm">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updatedLogement">Modifier insolite</h5>
+                <button #modalHideUpdated type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onUpdatedLogement()" #updatedlogementSubmit="ngForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="hebergementInput">Libelle *</label>
+                                <input type="text" [(ngModel)]="updatedLibelle" name="updatedLibelle"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="montantInput">Montant *</label>
+                                <input type="number" [(ngModel)]="updatedMontant" name="updatedMontant"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="hebergementInput">Description</label>
+                        <textarea [(ngModel)]="updatedDescription" name="updatedDescription" class="form-control" required cols="2"
+                            rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label" for="capaciteAccueilInput">Capacite d'Accueil *</label>
+                                <input type="number" [(ngModel)]="updatedCapaciteAccueil" name="updatedCapaciteAccueil"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="nombrePieceInput">Nombre de Piece *</label>
+                                <input type="number" [(ngModel)]="updatedNombrePiece" name="updatedNombrePiece"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="nombreChambreInput">Nombre de Chambre *</label>
+                                <input type="number" [(ngModel)]="updatedNombreChambre" name="updatedNombreChambre"
+                                    class="form-control" required placeholder="ex : boite">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label" for="hebergementInput">Hebergement *</label>
+                                <select [(ngModel)]="updatedCategorie_hebergement" name="updatedCategorie_hebergement" class="form-control" >
+                                    <option value="" disabled>Selectionner un hebergement</option>
+                                    <option [value]="item.id" *ngFor="let item of hebergementList"> {{item.libelle}} </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="destinationInput">Destination *</label>
+                                <select [(ngModel)]="updatedCategorie_destination" name="updatedCategorie_destination" class="form-control" >
+                                    <option value="" disabled>Selectionner une Destination</option>
+                                    <option [value]="item.id" *ngFor="let item of destinationList"> {{item.libelle}} </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="inspirationInput">Inspiration *</label>
+                                <select [(ngModel)]="updatedCategorie_inspiration" name="updatedCategorie_inspiration" class="form-control" >
+                                    <option value="" disabled>Selectionner une Inspiration</option>
+                                    <option [value]="item.id" *ngFor="let item of inspirationList"> {{item.libelle}} </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label" for="isCodepromoInput">Code Promo *</label>
+                                <select [(ngModel)]="isCodepromo" name="isCodepromo" class="form-control" >
+                                    <option value="Non">Non</option>
+                                    <option value="Oui">Oui</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="pourcentageInput">Pourcentage {{isCodepromo}} *</label>
+                                <input type="number" [disabled]="isCodepromo=='Non'?true:false" [(ngModel)]="isPourcentage" name="isPourcentage"
+                            class="form-control" required placeholder="ex : 12">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal"
+                                    type="button"><i class="fas fa-times-circle"></i> Annuler</button>
+                            </div>
+                            <div class="col-md-6 text-center d-grid gap-2">
+                                <button [disabled]="!updatedlogementSubmit.form.valid || isUpdatedLoaderLogement"
+                                    class="btn btn-primary waves-effect waves-light" type="submit"><i
+                                        class="fas fa-save"></i> {{btnNameLogement}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+

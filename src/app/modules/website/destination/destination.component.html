@@ -1,0 +1,52 @@
+<div class="d-item-destination">
+    <img class="d-block w-100 d-img-destination" src="assets/images/background/insolite1.jpg" alt="First slide" />
+    <div class="carousel-caption item-c1-destination">
+        <h2>Nos destinations</h2>
+        <span>Où voulez-vous partir ?</span>
+    </div>
+</div>
+<section class="section-experience">
+    <div class="container">
+        <div class="col-md-12 mt-5">
+            <h2 class="title title-big title-blue">
+                <span class="title-black">On a testé pour vous</span><br>
+                Nos destinations favorites
+            </h2>
+        </div>
+        <div>
+            <!-- <div class="text-center">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div> -->
+            <!-- <i class="fas fa-spinner fa-spin"></i> -->
+            <div class="row">
+                <div class="col-md-4" *ngFor="let item of destinationList">
+                    <div class="card1" (click)="onClickDestinationById(item)">
+                        <h3>{{item.libelle}}</h3>
+                        <!-- <p class="m-0">AtipyHouse</p> -->
+                        <div class="go-corner">
+                          <div class="go-arrow">
+                            →
+                          </div>
+                        </div>
+                      </div> 
+                </div>
+            </div>
+                         
+        </div>       
+    </div>
+
+</section>
+<!-- <section>
+    <div class="container">
+        <div class="card3 mb-5">
+            <img class="cardImg1" src="assets/images/background/insolite4.jpg" alt="First slide" />
+            <div class="imgLogoCircle">
+                <img class="" src="assets/images/logoCircle.png" height="50" alt="First slide" />
+            </div>
+            <div class="imgTxt">
+                <h1>à partir de 1.500 <span style="font-size: 15px;">FCFA/Nuité</span></h1>
+                <p>Lorem ipsum dolor sit, amet consectetur</p>
+            </div>
+        </div>
+    </div>
+</section> -->

@@ -1,0 +1,45 @@
+<div class="d-item-destination">
+    <img class="d-block w-100 d-img-destination" src="assets/images/background/insolite3.jpg" alt="First slide" />
+    <div class="carousel-caption item-c1-destination">
+        <h2>idée</h2>
+        <span>Trouvez une idée</span>
+    </div>
+</div>
+
+<section class="section-experience">
+    <div class="container">
+        <div class="col-md-12 mt-5">
+            <h2 class="title title-big title-blue">
+                <span class="title-black">On va vous faire rêver !</span><br>
+                Nos Idées
+            </h2>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-4" *ngFor="let item of inspirationtList">
+                    <div class="card1" (click)="onClickInspirationById(item)">
+                        <h3>{{item.libelle}}</h3>
+                        <!-- <p class="small p-0 m-0">{{item.description}}</p> -->
+                        <div class="go-corner">
+                          <div class="go-arrow">
+                            →
+                          </div>
+                        </div>
+                      </div> 
+                </div>
+            </div> 
+            <!-- <a class="card2" href="#">
+                <h3>This is option 2</h3>
+                <p class="small">Card description with lots of great facts and interesting details.</p>
+                
+                <div class="go-corner" href="#">
+                  <div class="go-arrow">
+                    →
+                  </div>
+                </div>
+              </a> -->
+        </div>
+    </div>
+
+</section>
+

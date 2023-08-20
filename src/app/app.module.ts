@@ -13,6 +13,21 @@ import { PartenaireLayoutComponent } from './layouts/partenaire-layout/partenair
 import { ToggleMenu } from './layouts/website-layout/components/toggleMenu.component';
 import { SplashScreenService } from './services/splash-screen.service';
 import { SplashComponent } from './splash/splash.component';
+import { CategoriePartenaireComponent } from './modules/client-partenaire/categorie-partenaire/categorie-partenaire.component';
+import { DashboardPartenaireComponent } from './modules/client-partenaire/dashboard-partenaire/dashboard-partenaire.component';
+import { DetailLogementComponent } from './modules/client-partenaire/detail-logement/detail-logement.component';
+import { LogementPartenaireComponent } from './modules/client-partenaire/logement-partenaire/logement-partenaire.component';
+import { MonProfileComponent } from './modules/client-partenaire/mon-profile/mon-profile.component';
+import { ReservationPartenaireComponent } from './modules/client-partenaire/reservation-partenaire/reservation-partenaire.component';
+import { AcceuilComponent } from './modules/website/acceuil/acceuil.component';
+import { DestinationComponent } from './modules/website/destination/destination.component';
+import { DestinationLogementComponent } from './modules/website/destination-logement/destination-logement.component';
+import { DetailinsoliteComponent } from './modules/website/detailinsolite/detailinsolite.component';
+import { HebergementComponent } from './modules/website/hebergement/hebergement.component';
+import { HebergementLogementComponent } from './modules/website/hebergement-logement/hebergement-logement.component';
+import { IdeesComponent } from './modules/website/idees/idees.component';
+import { InsprirationLogementComponent } from './modules/website/inspriration-logement/inspriration-logement.component';
+import { ReservationComponent } from './modules/website/reservation/reservation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +38,22 @@ import { SplashComponent } from './splash/splash.component';
     AppPageNotFoundComponent,
     PartenaireLayoutComponent,
     ToggleMenu,
-    SplashComponent
+    SplashComponent,
+    CategoriePartenaireComponent,
+    DashboardPartenaireComponent,
+    DetailLogementComponent,
+    LogementPartenaireComponent,
+    MonProfileComponent,
+    ReservationPartenaireComponent,
+    AcceuilComponent,
+    DestinationComponent,
+    DestinationLogementComponent,
+    DetailinsoliteComponent,
+    HebergementComponent,
+    HebergementLogementComponent,
+    IdeesComponent,
+    InsprirationLogementComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,   

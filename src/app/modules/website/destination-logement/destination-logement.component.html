@@ -1,0 +1,46 @@
+<div class="customInsoliteCategorie">
+    <div style="margin-top: 13px;">Destinations > {{libelle}}</div>
+    <div style="margin-top: 10px;">
+        <button (click)="onClickBack()" type="button" class="btn btn-outline-danger btn-sm">Retoure</button>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div *ngIf="!logementList?.length" class="text-center">
+                <img class="" src="assets/images/loader.png" style="height: 400px;" alt="First slide" />
+                <p class="p-0 m-0">No data</p>
+            </div>
+            <div class="gridFlexH pt-3 pb-3">
+                <div class="card3" *ngFor="let item of logementList" (click)="onClickLogementById(item)">
+                    <img class="cardImg1" [src]="urlApi+item.image1" alt="First slide" />
+                    <div class="imgLogoCircle">
+                        <img class="" src="assets/images/logoCircle.png" height="50" alt="First slide" />
+                    </div>
+                    <div class="imgTxt">
+                        <h1>à partir de {{item.montant}} <span style="font-size: 15px;">FCFA/Nuité</span></h1>
+                        <p>{{item.description}}</p>
+                    </div>
+                </div>
+                <!-- <div class="" style="background-color: blueviolet; width: 49%;"><p>col-lg-8</p></div>
+                <div class="" style="background-color: rgb(20, 0, 39); width: 49%;"><p>col-lg-8</p></div> -->
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <h4 class="mt-3">Les derniers destinations</h4>
+            <div style="height: 1px;width: 100%; background-color: black;"></div>
+            <div class="row">
+                <div class="col-lg-12" *ngFor="let item of destinationList">
+                    <div class="card1" (click)="onClickDestinationById(item)">
+                        <h3>{{item.libelle}}</h3>
+                        <div class="go-corner" href="javascript:void(0)">
+                            <div class="go-arrow">
+                                →
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

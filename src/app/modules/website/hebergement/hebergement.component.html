@@ -1,0 +1,44 @@
+<div class="d-item-hebergement">
+    <img class="d-block w-100 d-img-hebergement" src="assets/images/background/insolite2.jpg" alt="First slide" />
+    <div class="carousel-caption item-c1-hebergement">
+        <h2>Nos hébergements</h2>
+        <span>Cabane ou bulle ?</span>
+    </div>
+</div>
+
+<section class="section-experience">
+    <div class="container">
+        <div class="col-md-12 mt-5">
+            <h2 class="title title-big title-blue">
+                <span class="title-black">Ça va déménager !</span><br>
+                Nos hébergements
+            </h2>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-4" *ngFor="let item of hebergementList">
+                    <div class="bloc-type" (click)="onClickHebergementById(item)">
+                        <div class="img lazy" [ngStyle]="{'display': 'block','background-image': 'url(' + urlApi+item.image + ')'}"></div>
+                        <!-- [ngStyle]="{'display': 'block', 'background-image': 'url('assets/images/background/insolite4.jpg');"} -->
+                        <h3 class="title">
+                          <a href="javascript:void(0)">{{item.libelle}}</a>
+                        </h3>
+                        <p class="description">{{item.description}}</p>
+                        <hr>
+                        <a href="javascript:void(0)" (click)="onClickHebergementById(item)" class="link">Voir les hébergements</a>
+                      </div>
+                    <!-- <div class="card1" (click)="onClickHebergementById(item)">
+                        <h3>{{item.libelle}}</h3>
+                        <p class="small p-0 m-0">{{item.description}}</p>
+                        <div class="go-corner">
+                          <div class="go-arrow">
+                            →
+                          </div>
+                        </div>
+                      </div>  -->
+                </div>
+            </div>              
+        </div>
+    </div>
+
+</section>

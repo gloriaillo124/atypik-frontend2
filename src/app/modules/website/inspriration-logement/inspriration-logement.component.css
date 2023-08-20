@@ -1,0 +1,88 @@
+.customInsoliteCategorie{
+    height: 50px;
+    background-color: rgb(57, 57, 71);
+    color: white;
+}
+
+.customInsoliteCategorie{
+    display: flex;
+    justify-content:space-between;
+    padding-inline: 90px;
+}
+
+.gridFlexH{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 1199px){
+    .flexCard{
+        justify-content: center;
+    }
+
+    .card3 {
+        width: 455px;
+    }
+
+.imgLogoCircle {
+    margin-top: -250px;
+}
+}
+
+@media (max-width: 999px){
+    .flexCard{
+        justify-content: center;
+    }
+    
+    .card3 {
+        width: 700px;
+    }
+
+    .imgLogoCircle {
+        margin-top: -380px;
+    }
+}
+
+
+@media (max-width: 760px){
+
+    .imgLogoCircle {
+        margin-top: -280px;
+    }
+}
+
+@media (max-width: 500px){
+
+    .imgLogoCircle {
+        margin-top: -250px;
+    }
+}
+
+@media (max-width: 460px){
+
+    .imgLogoCircle {
+        margin-top: -230px;
+    }
+}
+
+@media (max-width: 425px){
+
+    .imgLogoCircle {
+        margin-top: -220px;
+    }
+}
+
+@media (max-width: 405px){
+
+    .imgLogoCircle {
+        margin-top: -200px;
+    }
+}
+
+@media (max-width: 375px){
+
+    .imgLogoCircle {
+        margin-top: -190px;
+    }
+}
